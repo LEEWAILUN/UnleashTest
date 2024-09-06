@@ -12,6 +12,7 @@ on:
       - frontend/**
       - website/**
       - coverage/**
+      
 jobs:
   build:
     runs-on: ubuntu-latest

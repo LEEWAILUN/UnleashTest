@@ -184,30 +184,17 @@ java {
 group = 'lib'
 version = 'V1'
 
-
-
-
 repositories {
     mavenCentral()
 }
-
-
-
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
 }
 
-
-
-
-/*
 test {
     // Specify the directory containing test classes
     testClassesDirs = sourceSets.test.output.classesDirs
-
-
-
 
     // Optionally configure test options
     testLogging {
@@ -216,10 +203,6 @@ test {
     }
     finalizedBy jacocoTestReport
 }
-*/
-
-
-
 
  jar {
     manifest {
@@ -229,9 +212,6 @@ test {
     archiveBaseName = 'unleash-test'  // Name of the JAR file
     destinationDirectory = file('build/libs')  // Output directory for the JAR file
 }
-
-
-
 
 jacocoTestReport {
     dependsOn test

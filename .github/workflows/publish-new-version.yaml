@@ -1,13 +1,10 @@
 name: Run npm version and push tags
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 permissions:
   contents: write
   id-token: write
-
 on:
   workflow_dispatch:
     inputs:
@@ -23,15 +20,12 @@ on:
         required: true
         type: boolean
         default: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [ 20.x ]
-
     services:
       # Label used to access the service container
       postgres:
@@ -46,7 +40,6 @@ jobs:
           - 5432:5432
         options: >-
           --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -92,12 +85,10 @@ jobs:
         env:
           CI: true
           TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-
   update-main-version:
     needs: build
     if: ${{ github.event.inputs.bump-main == 'true' }}
     runs-on: ubuntu-latest
-
     steps:
       - name: checkout main branch
         uses: actions/checkout@v4
@@ -131,7 +122,6 @@ jobs:
           git add package.json CHANGELOG.md
           git commit -m "chore: bump version to ${{ github.event.inputs.version }}"
           git push origin main
-
   publish-docker:
     needs: build
     uses: ./.github/workflows/docker_publish.yaml
@@ -139,20 +129,17 @@ jobs:
     with:
       version: ${{ github.event.inputs.version }}
       is-latest-version: ${{ github.event.inputs.is-latest-version == 'true' }}
-
   publish-npm:
     needs: build
     uses: ./.github/workflows/release.yaml
     secrets: inherit
     with:
       version: ${{ github.event.inputs.version }}
-
   release-changelog: # TODO this changelog is different than the git-cliff one above
     needs: build
     uses: ./.github/workflows/release_changelog.yml
     with:
       version: ${{ github.event.inputs.version }}
-
   update-version-checker:
     needs: publish-docker
     if: ${{ github.event.inputs.is-latest-version == 'true' }}

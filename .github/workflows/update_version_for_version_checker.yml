@@ -1,9 +1,7 @@
 name: Update version for version checker
-
 permissions:
   id-token: write
   contents: read
-
 on:
   workflow_call:
     inputs:
@@ -17,7 +15,6 @@ on:
         description: "Which version should we set OSS to"
         type: 'string'
         required: true
-
 jobs:
   update:
     if: ${{ !(contains(github.ref, 'beta') || contains(github.ref, 'alpha')) }}

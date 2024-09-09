@@ -6,7 +6,6 @@ on:
         description: "Which version number should we use for the release"
         type: 'string'
         required: true
-
 jobs:
   release:
     runs-on: ubuntu-latest

@@ -1,5 +1,4 @@
 name: 'Notify enterprise of commit in main'
-
 on:
   push:
     branches:
@@ -7,11 +6,9 @@ on:
     paths-ignore:
       - website/**
       - coverage/**
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20
@@ -39,7 +36,6 @@ jobs:
                  message: ${{ toJSON(github.event.head_commit.message) }},
               }
             })
-
       # build static assets after triggering the sync workflow.
       # Adding a validation step in the sync workflow will ensure that the static assets are built before deployment.
       - name: Build static assets

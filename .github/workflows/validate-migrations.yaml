@@ -1,5 +1,4 @@
 name: Test db migrations
-
 on:
   pull_request:
     branches:

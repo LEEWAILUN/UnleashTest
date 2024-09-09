@@ -1,5 +1,4 @@
 name: Coverage
-
 on:
   push:
     branches:
@@ -8,11 +7,9 @@ on:
       - website/**
       - frontend/**
       - coverage/**
-
 jobs:
   coverage:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [20.x]
@@ -30,8 +27,6 @@ jobs:
           - 5432:5432
         options: >-
           --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
-
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}

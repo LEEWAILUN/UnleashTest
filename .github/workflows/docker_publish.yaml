@@ -1,5 +1,4 @@
 name: Publish to dockerhub
-
 on:
   push:
     branches:
@@ -18,7 +17,6 @@ on:
         type: boolean
         default: true
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest

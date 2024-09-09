@@ -1,10 +1,8 @@
 name: Check links
-
 on:
   workflow_dispatch:
   schedule:
     - cron: '30 12 * * 1-5'
-
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -29,7 +27,6 @@ jobs:
           fail: true
           args: '"./website/docs/**/*.md" "./website/docs/**/*.mdx" "./src/mailtemplates/*.mustache" --scheme http --scheme https --cache --max-cache-age 7d --exclude-mail --verbose' # other excludes are in .lycheeignore
           output: ${{ env.issue-content }}
-
       # Permissions (issues: read)
       - name: 'Look for an existing issue'
         if: ${{ failure() }}
@@ -39,7 +36,6 @@ jobs:
         with:
           state: open
           labels: ${{ env.issue-lookup-label }}
-
       # Permissions (issues: write)
       - name: 'Create a new issue, or update an existing one'
         if: ${{ failure() }}

@@ -1,5 +1,4 @@
 name: Generate documentation
-
 on:
   push:
     branches:
@@ -11,7 +10,6 @@ on:
 
   schedule:
     - cron: '0 0 * * *'
-
 jobs:
   build:
     if: false # disable this job
